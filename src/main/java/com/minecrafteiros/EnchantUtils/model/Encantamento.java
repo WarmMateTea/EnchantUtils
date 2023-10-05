@@ -6,7 +6,7 @@ public class Encantamento {
     private Boolean tesouro;
     private String nivelMax;
     private Integer pesoEnchantamento;
-    
+
     // Relacionamento com outras tabelas
     // incompatibilidade
     // itensPrimarios
