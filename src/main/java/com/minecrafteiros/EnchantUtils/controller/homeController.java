@@ -33,7 +33,7 @@ public class homeController {
         return "home/registroEncantamentos";
     }
 
-    @PostMapping
+    @PostMapping("/registroEncantamentos")
     public String registrarEncantamento(EncantamentoDataRecord data) {
         repository.save(new Encantamento(data));
 

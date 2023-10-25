@@ -928,7 +928,7 @@ video {
                     <h1 class="text-4xl font-bold mr-4">Encantamentos Cadastrados</h1>
 
                     <a class="scale-0 flex flex-row items-center bg-ACCENT-DAY text-TEXT-ACCENT rounded-xl pl-1 pr-3 py-1 h-fit font-semibold hover:bg-SECONDARY-NIGHT hover:text-TEXT-NIGHT transition" href="./registroEncantamentos.html">
-                        <svg class="w-7 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 mr-1 w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
                         Novo Encantamento
@@ -951,8 +951,8 @@ video {
                             <td th:text="${encantamento.nome}"></td>
                             <td th:text="${encantamento.descricao}"></td>
                             <td th:text="${encantamento.tesouro}"></td>
-                            <td th:text="${encantamento.nivelMax}"></td>
-                            <td th:text="${encantamento.pesoEncantamento}"></td>
+                            <td th:text="${encantamento.nivel_max}"></td>
+                            <td th:text="${encantamento.peso_encantamento}"></td>
                         </tr>
                     </tbody>
                 </table> 
