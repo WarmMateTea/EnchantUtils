@@ -35,6 +35,8 @@ public class homeController {
 
     @PostMapping("/registroEncantamentos")
     public String registrarEncantamento(EncantamentoDataRecord data) {
+        System.out.println(data);
+        System.out.println(data.tesouro());
         repository.save(new Encantamento(data));
 
         return "home/registroEncantamentos";
