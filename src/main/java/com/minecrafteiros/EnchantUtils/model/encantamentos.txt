@@ -1,0 +1,39 @@
+Mending#Usa XP para reparar suas ferramentas, armas e armadura#1#2#true
+Protection#Proteção geral contra ataques, fogo, lava e quedas#4#10#false
+Feather Falling#Reduz o dano causado por quedas#4#5#false
+Fire Protection#Reduz o dano causado por fogo e lava#4#5#false
+Projectile Protection#Reduz o dano causado por projéteis#4#5#false
+Aqua Affinity#Acelera o quão rápido você pode minerar blocos em baixo d'água#1#2#false
+Blast Protection#Reduz o dano causado por explosões#4#2#false
+Respiration#Estende o tempo máximo que o jogador por ficar em baixo d'água (também melhora sua visão)#3#2#false
+Depth Strider#Aumenta a velocidade do jogador em baixo d'água#3#2#false
+Frost Walker#Congela a água para que você possa andar sobre ela (também permite andar sobre blocos de magma sem tomar dano)#2#2#true
+Thorns#Causa dano ao ser atacado#3#1#false
+Swift Sneak#Aumenta a velocidade de movimento enquanto agachado#3#1#false
+Curse of Binding#Item amaldiçoado não pode ser removido do jogador#1#1#true
+Soul Speed#Aumenta a velocidade de movimento quando andando em cima de blocos de Soul Sand#3#1#true
+Sharpness#Aumenta dano causado aos mobs#5#10#false
+Bane of Arthropods#Aumenta dano causado aos artrópodes#5#5#false
+Knockback#Aumenta o knockback dado aos mobs (inimigo é repelido para trás)#2#5#false
+Smite#Aumenta o dano causado a mobs mortos-vivos#5#5#false
+Fire Aspect#Incedia o alvo#2#2#false
+Looting#Aumenta quantidade de itens dropado pelos mobs#3#2#false
+Sweeping Edge#Aumenta o dano do ataque em área#3#2#false
+Efficiency#Aumenta o quão rápido você pode quebrar blocos#5#10#false
+Fortune#Aumenta quantidade de items ao quebrar blocos#3#2#false
+Silk Touch#Minera items frágeis#1#1#false
+Power#Aumenta dano causado pelas flechas#5#10#false
+Flame#Transforma as flechas em flechas flamejantes#1#2#false
+Punch#Aumenta a quantidade de knockback causado pela flecha (inimigo é repelido para trás)#2#2#false
+Infinity#Permite atirar uma quantidade infinita de flechas#1#1#false
+Luck of the Sea#Aumenta chances de pegar items valiosos com a vara de pescar#3#2#false
+Lure#Aumenta a taxa de peixes mordendo seu anzol#3#2#false
+Loyalty#Retorna seu tridente quando ele é atirado como uma lança#3#5#false
+Impaling#Aumenta dano causado contra criaturas marinhas#5#2#false
+Riptide#Impulsiona o jogador para frente quando o item encantado é lançado na água ou na chuva#3#2#false
+Channeling#Invoca um raio em um mob alvo quando o item encantado é lançado (o mob alvo deve estar na chuva)#1#1#false
+Piercing#Flecha pode atravessar várias entidades#4#10#false
+Quick Charge#Reduz tempo necessário para recarregar a besta#3#5#false
+Multishot#Atira 3 flechas mas custa apenas 1 flecha (de seu inventário)#1#2#false
+Unbreaking#Aumenta a durabilidade do item#3#5#false
+Curse of Vanishing#Item amaldiçoado irá desapareçar caso o jogador morra com ele em seu inventário#1#1#true
