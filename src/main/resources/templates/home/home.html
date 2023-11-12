@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <title>Encanta++</title>
     <link th:href="@{/css/styles_home.css}" rel="stylesheet" href="../../static/css/styles_home.css">
+    <script th:src="@{/js/home.js}" src="../../static/js/home.js" defer></script>
 </head>
 <body>
     <div id="main-menu">
         <img src="https://cdn2.steamgriddb.com/file/sgdb-cdn/logo/9d0e6b29552e8e2d0571bf1aef137c04.png" id="minecraft-title">
         <p id="splash">Ezboy4life esteve aqui!</p>
         <div id="buttons-wrapper">
-            <button class="mcButtons">Encantar algo</button>
-            <button class="mcButtons">Fazer alguma outra coisa</button>
-            <button class="mcButtons">Fazer alguma outra terceira coisa</button>
+            <button class="mcButtons" id="encantar-item">Encantar um Item</button>
+            <button class="mcButtons" id="listar-encantamentos">Listar Encantamentos</button>
+            <button class="mcButtons" id="cadastrar-encantamentos">Cadastrar um Encantamento</button>
             <div id="lower-buttons-wrapper">
                 <button class="mcButtons">Opções</button>
                 <button class="mcButtons">Diversão</button>
