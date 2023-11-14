@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'Minecraft';
+    src: url("../fonts/minecraft-font.ttf");
+}
+
+* {
+    font-family: 'Minecraft';
+}
+
+html {
+    top: 0;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    top: 0;
+    background-image: url("../img/dirt_texture.jpg");
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-size: 5vw;
+    filter: brightness(0.3)
+}

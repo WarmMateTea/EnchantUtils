@@ -2,7 +2,7 @@
     font-family: 'Minecraft';
     src: url("../fonts/minecraft-font.ttf");
 }
-@import url('https://fonts.googleapis.com/css2?family=Inter&family=Pixelify+Sans&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inter&family=Pixelify+Sans&display=swap'); tinha importado isso mas nao to usando */
 
 * {
     font-family: 'Minecraft';
