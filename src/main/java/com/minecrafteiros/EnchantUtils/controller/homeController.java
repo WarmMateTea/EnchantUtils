@@ -68,6 +68,7 @@ public class homeController {
                         Integer.parseInt(data[3])      // Peso
                     ));
             }
+            aux.close();
         } catch (FileNotFoundException e) {
             System.out.println("Ocorreu um erro na função 'fillTable'!");
             e.printStackTrace();
