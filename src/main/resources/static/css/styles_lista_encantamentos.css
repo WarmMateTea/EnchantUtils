@@ -68,3 +68,36 @@ main {
     box-shadow: -3px -3px #808080 inset;
     width: 100%;
 }
+
+.encantamentosWrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    height: 10vh;
+    overflow: hidden;
+    gap: 15px;
+}
+
+.encantamentosWrapper:first-of-type {
+    margin-top: 15px;
+}
+
+.encantamentosImages {
+    height: 100%;
+    user-select: none;
+    margin: 0;
+}
+
+.encantamentosNomes {
+    font-size: 1.25vw;
+    font-weight: 100;
+    margin: 0;
+}
+
+.encantamentosDescricao {
+    font-size: 1vw;
+    margin: 0;
+    color: #808080;
+    text-overflow: clip;
+    line-height: 1.25vw;
+}
