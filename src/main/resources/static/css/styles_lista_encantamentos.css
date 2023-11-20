@@ -19,16 +19,6 @@ body {
     margin: 0;
 }
 
-header, footer {
-    /* top: 0; */
-    /* position: absolute; */
-    background-image: url("../img/dirt_texture.jpg");
-    height: 20vh;
-    width: 100vw;
-    background-size: 10vh;
-    filter: brightness(0.3)
-}
-
 main {
     height: 60vh;
     display: flex;
@@ -36,23 +26,71 @@ main {
     justify-content: center;
 }
 
+header, footer {
+    height: 20vh;
+}
+
+#lista-header-background,
+#lista-footer-background,
 #lista-background {
     position: absolute;
     width: 100%;
-    height: 60vh;
-    margin: 0 25vh;
     background-image: url("../img/dirt_texture.jpg");
     background-size: 10vh;
+    z-index: -1;
+    
+}
+
+#header-items-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-shadow: 0px 3px #444;
+    height: 100%;
+
+}
+
+header h1 {
+    font-size: 1.25vw;
+    font-weight: 200;
+    text-align: center;
+    margin: 0;
+}
+
+#searchbar {
+    width: 30vw;
+    height: 5vh;
+    color: white;
+    background-color: black;
+    border: 5px solid #a0a0a0;
+    outline-width: 0;
+    font-size: 1vw;
+    line-height: 5vh;
+}
+
+#lista-background {
+    height: 60vh;
+    margin: 0 25vh;
     box-shadow: 0px 15px 25px 0px rgba(0,0,0,0.95) inset, 0px -15px 25px 0px rgba(0,0,0,0.95) inset;
     filter: brightness(0.15);
+}
+
+#lista-header-background,
+#lista-footer-background {
+    height: 20vh;
+    margin: 0;
+    filter: brightness(0.3);
 }
 
 #lista-encantamentos {
     color: white;
     width: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
     margin: 0 30vw;
-    z-index: 1;
 }
 
 #lista-encantamentos::-webkit-scrollbar {
@@ -100,4 +138,8 @@ main {
     color: #808080;
     text-overflow: clip;
     line-height: 1.25vw;
+}
+
+#upper-buttons-wrapper {
+    width: 100%;
 }
