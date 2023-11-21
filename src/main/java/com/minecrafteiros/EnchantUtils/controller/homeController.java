@@ -62,11 +62,11 @@ public class homeController {
 
     public void fillTable() {   /* Preenche a tabela "encantamento" com todos os encantamentos do minecraft (｡◕‿‿◕｡) */
         try {
-            File encantamentos = new File("src\\main\\java\\com\\minecrafteiros\\EnchantUtils\\model\\encantamentos.txt");
+            File encantamentos = new File("src\\main\\resources\\static\\csv\\encantamentos.csv");
             Scanner aux = new Scanner(encantamentos);
             String[] data;
             while (aux.hasNextLine()) {
-                data = aux.nextLine().split("#");
+                data = aux.nextLine().split(",");
                 repository.save(new Encantamento(
                         data[0],                       // Nome
                         data[1],                       // Descrição
