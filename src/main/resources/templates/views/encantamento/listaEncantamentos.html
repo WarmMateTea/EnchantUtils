@@ -16,14 +16,14 @@
       <div id="lista-header-background"></div>
       <div id="header-items-wrapper">
         <h1>Selecionar Encantamento</h1>
-        <input id="searchbar" type="text">
+        <input spellcheck="false" id="searchbar" type="text">
       </div>
   </header>
   <main>
 
     <div id="lista-background"></div>
     <div id="lista-encantamentos">
-      <div class="encantamentosWrapper" th:each="encantamento : ${listaEncantamentos}">
+      <div class="encantamentosWrapper" th:tabindex="${encantamento.id}" th:each="encantamento : ${listaEncantamentos}" th:value="${encantamento.id}" th:ondblclick="|window.location.href='formEncantamento?id=${encantamento.id}'|">
         <img class="encantamentosImages" src="../../static/img/Enchanted_Book.gif" th:src="@{/img/Enchanted_Book.gif}">
         <div class="encantamentosNomeDescricaoWrapper">
           <h1 class="encantamentosNomes" th:text="${encantamento.nome}"></h1>
@@ -34,16 +34,16 @@
 
   </main>
   <footer>
-    <div id="lista-header-background"></div>
+    <div id="lista-footer-background"></div>
     <div id="footer-buttons-wrapper">
       <div id="upper-buttons-wrapper">
+        <button id="create-new-enchantment"class="upperButtons mcButtons" th:onclick="|window.location.href='formEncantamento'">Criar Encantamento Customizado</button>
         <button id="see-enchantment-details" class="upperButtons mcButtons">Visualizar Encantamento Selecionado</button>
-        <button id="create-new-enchantment"class="upperButtons mcButtons">Criar Encantamento Customizado</button>
       </div>
       <div id="lower-buttons-wrapper">
         <button id="edit-enchantment" class="lowerButtons mcButtons">Editar</button>
         <button id="delete-enchantment"class="lowerButtons mcButtons">Deletar</button>
-        <button id="reset-table" class="lowerButtons mcButtons" th:onclick="|window.location.href='resetTable'|">Resetar</button>
+        <button id="reset-table" class="lowerButtons mcButtons" th:onclick="|window.location.href='resetTable'|">Resetar Tabela</button>
         <button id="return"class="lowerButtons mcButtons">Voltar</button>
       </div>
     </div>

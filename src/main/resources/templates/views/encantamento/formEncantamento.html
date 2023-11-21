@@ -1,0 +1,32 @@
+<!-- play em like atari -->
+<!DOCTYPE html> 
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+
+<head>
+    <title>Criar/Editar Encantamento</title>
+    <link th:href="@{/css/styles_form_encantamento.css}" rel="stylesheet" href="../../../static/css/styles_form_encantamento.css">
+    <script th:src="@{/js/listaEncantamentos.js}" src="../../static/js/listaEncantamentos.js" defer></script>
+</head>
+
+<body>
+    <div id="background"></div>
+        <h1 class="fieldTitle">Nome</h1>
+        <input autocomplete="off" spellcheck="false" type="text" class="textBox" id="nome" th:value="${encantamento.nome}">
+        <h1 class="fieldTitle">Descrição</h1>
+        <input autocomplete="off" spellcheck="false" type="text" class="textBox" id="descricao" th:value="${encantamento.descricao}">
+        <h1 class="fieldTitle">Tesouro</h1>
+        <input autocomplete="off" spellcheck="false" type="checkbox" class="textBox" id="tesouro" th:checked="${encantamento.tesouro}">
+        <h1 class="fieldTitle">Nível Máximo</h1>
+        <input autocomplete="off" spellcheck="false" type="number" class="textBox" id="nivelmax" max="5" th:value="${encantamento.nivel_max}">
+        <h1 class="fieldTitle">Peso do Encantamento</h1>
+        <input autocomplete="off" spellcheck="false" type="number" class="textBox" id="peso" max="10" th:value="${encantamento.peso_encantamento}">
+        <div id="buttons-wrapper">
+            <button class="mcButtons">Salvar</button>
+            <button class="mcButtons" th:onclick="|window.location.href='listaEncantamentos'|">Cancelar</button>
+        </div>
+
+</body>
+</html>

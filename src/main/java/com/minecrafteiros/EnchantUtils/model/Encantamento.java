@@ -77,6 +77,14 @@ public class Encantamento {
         this.peso_encantamento = peso_encantamento;
     }
 
+    public void updateData(EncantamentoEditRecord encantamento) {
+        this.nome = encantamento.nome();
+        this.descricao = encantamento.descricao();
+        this.tesouro = encantamento.tesouro();
+        this.nivel_max = encantamento.nivel_max();
+        this.peso_encantamento = encantamento.peso_encantamento();
+    }
+
     // Relacionamento com outras tabelas
     // incompatibilidade
     // itensPrimarios
