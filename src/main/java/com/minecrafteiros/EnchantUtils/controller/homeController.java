@@ -30,7 +30,6 @@ public class homeController {
     @GetMapping("/listaEncantamentos")
     public String loadListaEncantamentos(Model model) {
         model.addAttribute("listaEncantamentos", repository.findAll());
-        fillTable();
         return "home/listaEncantamentos";
     }
 
@@ -51,6 +50,14 @@ public class homeController {
             ));
 
         return "home/registroEncantamentos";
+    }
+
+    @RequestMapping(value="/resetTable")
+    public String resetTable() {
+        repository.deleteAll();
+        fillTable();
+        return "redirect:/home/listaEncantamentos";
+        
     }
 
     public void fillTable() {   /* Preenche a tabela "encantamento" com todos os encantamentos do minecraft (｡◕‿‿◕｡) */

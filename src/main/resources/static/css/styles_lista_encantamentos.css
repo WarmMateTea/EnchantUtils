@@ -30,6 +30,13 @@ header, footer {
     height: 20vh;
 }
 
+footer {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+}
+
 #lista-header-background,
 #lista-footer-background,
 #lista-background {
@@ -66,7 +73,7 @@ header h1 {
     height: 5vh;
     color: white;
     background-color: black;
-    border: 5px solid #a0a0a0;
+    border: 3px solid #a0a0a0;
     outline-width: 0;
     font-size: 1vw;
     line-height: 5vh;
@@ -87,10 +94,13 @@ header h1 {
 }
 
 #lista-encantamentos {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
     color: white;
-    width: 100%;
+    width: 40vw;
     overflow-y: auto;
-    margin: 0 30vw;
 }
 
 #lista-encantamentos::-webkit-scrollbar {
@@ -110,9 +120,8 @@ header h1 {
 .encantamentosWrapper {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: space-between;
     height: 10vh;
-    overflow: hidden;
+    width: 100%;
     gap: 15px;
 }
 
@@ -133,13 +142,65 @@ header h1 {
 }
 
 .encantamentosDescricao {
-    font-size: 1vw;
+    height: 2.8vh;
+    overflow: hidden;
     margin: 0;
     color: #808080;
-    text-overflow: clip;
-    line-height: 1.25vw;
+}
+
+#footer-buttons-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #upper-buttons-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: 25px;
     width: 100%;
+}
+
+#lower-buttons-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: 25px;
+    height: 100%;
+}
+
+.mcButtons {
+    width: 100%;
+    height: 6vh;
+    margin-bottom: 10px;
+    font-family: 'Minecraft';
+    border: 3px solid black;
+    background-color: #666;
+    background-size: 100% 400px;
+    background-position: center;
+    color: white;
+    font-size: 0.8vw;
+    text-shadow: 0px 3px #444;
+    box-shadow: inset 3px 3px 1px rgba(256,256,256,.3), inset -3px -6px 1px rgba(0,0,0,.15);
+}
+
+.mcButtons:hover {
+    border: 3px solid white;
+}
+
+.upperButtons {
+    width: 20vw;
+}
+
+.lowerButtons {
+    width: calc(10vw - 12.5px);
+}
+
+
+.truncate {
+    line-height:normal;
 }

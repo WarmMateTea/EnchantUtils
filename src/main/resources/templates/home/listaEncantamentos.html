@@ -8,7 +8,7 @@
 <head>
     <title>Lista de Encantamentos</title>
     <link th:href="@{/css/styles_lista_encantamentos.css}" rel="stylesheet" href="../../static/css/styles_lista_encantamentos.css">
-    <!-- <script th:src="@{/js/styles_lista_encantamentos.js}" src="../../static/js/home.js" defer></script> -->
+    <script th:src="@{/js/listaEncantamentos.js}" src="../../static/js/listaEncantamentos.js" defer></script>
 </head>
 
 <body>
@@ -20,26 +20,31 @@
       </div>
   </header>
   <main>
+
     <div id="lista-background"></div>
     <div id="lista-encantamentos">
-      <div class="encantamentosWrapper">
-        <img class="encantamentosImages" src="../../static/img/Enchanted_Book.gif">
+      <div class="encantamentosWrapper" th:each="encantamento : ${listaEncantamentos}">
+        <img class="encantamentosImages" src="../../static/img/Enchanted_Book.gif" th:src="@{/img/Enchanted_Book.gif}">
         <div class="encantamentosNomeDescricaoWrapper">
-          <h1 class="encantamentosNomes">Sharpness</h1>
-          <p class="encantamentosDescricao">Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum </p>
+          <h1 class="encantamentosNomes" th:text="${encantamento.nome}"></h1>
+          <p class="encantamentosDescricao truncate" th:text="${encantamento.descricao}"></p>
         </div>
       </div>
-    </div>    
+    </div>   
+
   </main>
   <footer>
     <div id="lista-header-background"></div>
     <div id="footer-buttons-wrapper">
       <div id="upper-buttons-wrapper">
-        <button id="see-enchantment-details"></button>
-        <button id="create-new-enchantment"></button>
+        <button id="see-enchantment-details" class="upperButtons mcButtons">Visualizar Encantamento Selecionado</button>
+        <button id="create-new-enchantment"class="upperButtons mcButtons">Criar Encantamento Customizado</button>
       </div>
       <div id="lower-buttons-wrapper">
-        <!-- terminar essa merda aqui! =) -->
+        <button id="edit-enchantment" class="lowerButtons mcButtons">Editar</button>
+        <button id="delete-enchantment"class="lowerButtons mcButtons">Deletar</button>
+        <button id="reset-table" class="lowerButtons mcButtons" th:onclick="|window.location.href='resetTable'|">Resetar</button>
+        <button id="return"class="lowerButtons mcButtons">Voltar</button>
       </div>
     </div>
   </footer>
