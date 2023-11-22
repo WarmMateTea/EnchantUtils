@@ -28,6 +28,11 @@ public class homeController {
         return "/home/home";
     }
 
+    @GetMapping("/encantar")
+    public String loadEncantar(Model model) {
+        model.addAttribute("anvilRequest", );
+    }
+
     @GetMapping("/listaEncantamentos")
     public String loadListaEncantamentos(Model model) {
         model.addAttribute("listaEncantamentos", repository.findAll());
