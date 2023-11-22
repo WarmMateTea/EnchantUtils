@@ -2,83 +2,75 @@ package com.minecrafteiros.EnchantUtils.model;
 
 import jakarta.persistence.*;
 
+//Classe invisível ao usuário. Aquilo que ele vê são os encantamento_referencia
 @Entity
 @Table(name="encantamento")
 public class Encantamento {
 
-    public Encantamento(EncantamentoDataRecord data) {
-        this.nome = data.nome();
-        this.descricao = data.descricao();
-        this.tesouro = data.tesouro();
-        this.nivel_max = data.nivel_max();
-        this.peso_encantamento = data.peso_encantamento();
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long Id;
 
-    public Encantamento(String nome, String descricao, Boolean tesouro, Integer nivel_max, Integer peso_encantamento) {
-        this.nome = nome;
-        this.descricao = descricao;
-        this.tesouro = tesouro;
-        this.nivel_max = nivel_max;
-        this.peso_encantamento = peso_encantamento;
-    }
+    Integer level;
+
+    @ManyToOne
+    @JoinColumn(name = "instance_id", nullable = false)
+    private Encantamento_Referencia instance_of;
+
+    @ManyToOne
+    @JoinColumn(name = "enchanted_item_id", nullable = false)
+    private Item applied_to_item;
+
+    @ManyToOne
+    @JoinColumn(name = "storage_item_id", nullable = false)
+    private Item stored_in_item;
 
     public Encantamento() {}
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nome;
-    private String descricao;
-    private Boolean tesouro;
-    private Integer nivel_max;
-    private Integer peso_encantamento;
+    public Encantamento(Integer level, Encantamento_Referencia instance_of, Item applied_to_item, Item stored_in_item) {
+        this.level = level;
+        this.instance_of = instance_of;
+        this.applied_to_item = applied_to_item;
+        this.stored_in_item = stored_in_item;
+    }
 
     public Long getId() {
-        return id;
+        return Id;
     }
 
-    public String getNome() {
-        return nome;
+    public void setId(Long id) {
+        Id = id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public Integer getLevel() {
+        return level;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public Encantamento_Referencia getInstance_of() {
+        return instance_of;
     }
 
-    public Boolean getTesouro() {
-        return tesouro;
+    public void setInstance_of(Encantamento_Referencia instance_of) {
+        this.instance_of = instance_of;
     }
 
-    public void setTesouro(Boolean tesouro) {
-        this.tesouro = tesouro;
+    public Item getApplied_to_item() {
+        return applied_to_item;
     }
 
-    public Integer getNivel_max() {
-        return nivel_max;
+    public void setApplied_to_item(Item applied_to_item) {
+        this.applied_to_item = applied_to_item;
     }
 
-    public void setNivel_max(Integer nivel_max) {
-        this.nivel_max = nivel_max;
+    public Item getStored_in_item() {
+        return stored_in_item;
     }
 
-    public Integer getPeso_encantamento() {
-        return peso_encantamento;
+    public void setStored_in_item(Item stored_in_item) {
+        this.stored_in_item = stored_in_item;
     }
-
-    public void setPeso_encantamento(Integer peso_encantamento) {
-        this.peso_encantamento = peso_encantamento;
-    }
-
-    // Relacionamento com outras tabelas
-    // incompatibilidade
-    // itensPrimarios
-    // itensSecundarios
 }
