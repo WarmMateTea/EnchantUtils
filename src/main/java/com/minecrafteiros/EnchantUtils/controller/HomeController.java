@@ -1,5 +1,6 @@
 package com.minecrafteiros.EnchantUtils.controller;
 
+import com.minecrafteiros.EnchantUtils.anvil.*;
 import com.minecrafteiros.EnchantUtils.model.Encantamento;
 import com.minecrafteiros.EnchantUtils.model.EncantamentoDataRecord;
 import com.minecrafteiros.EnchantUtils.model.EncantamentoEditRecord;
@@ -12,7 +13,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+
 
 @RequestMapping("/home")
 @Controller
@@ -23,7 +28,58 @@ public class HomeController {
 
     @GetMapping()
     public String loadForm() {
-        return "/views/home/home.html";
+        return "/views/home/home.html"; //colocar plano de fundo bonitinho do luigi
+    }
+
+    @GetMapping("/encantar")
+    public String loadEncantar(Model model) {
+        List<Encantamento> listaEncantamentos = repository.findAll();
+        model.addAttribute("encantamentos", listaEncantamentos);
+        return "/views/encantamento/encantar";
+    }
+
+    @PostMapping("/encantar")
+    public String encantarItens(
+            @RequestParam("item") String item,
+            @RequestParam("encantamentos") List<Long> encantamentosSelecionados,
+            @RequestParam Map<String,String> enchantmentValues,
+            Model model) {
+        List<Encantamento> listaEncantamentosSelecionados = repository.findAllById(encantamentosSelecionados);
+
+        Item i = new Item(item, item.toUpperCase());    //incrementar depois
+        Anvil a = new Anvil();
+        AnvilResponse ar = a.Request(i, convertEncantamentoToEnchantment(listaEncantamentosSelecionados, enchantmentValues));
+
+        return "/views/encantamento/resultado";  //ainda n existe
+    }
+
+    @GetMapping("/encantar-tesouro")
+    public String listarEncantamentosTesouro(Model model) {
+        List<Encantamento> encantamentos = repository.findAllTesouros();
+        model.addAttribute("encantamentos", encantamentos);
+        return "listaEncantamentos";
+    }
+
+    @GetMapping("/encantar-todos")
+    public List<Encantamento> getTodosEncantamentos() {
+        return repository.findAll();
+    }
+
+    @GetMapping("/encantar-por-nome")
+    public List<Encantamento> getEncantamentosPorNome(@RequestParam String nome) {
+        return repository.findByNome(nome);
+    }
+
+    private ArrayList<Enchantment> convertEncantamentoToEnchantment(List<Encantamento> listaEntrada, Map<String,String> enchantmentValues) {
+        ArrayList<Enchantment> listaSaida = new ArrayList<Enchantment>();
+        for (Encantamento e : listaEntrada) {
+            listaSaida.add(new Enchantment(
+                    EnchantmentReferences.EnchantRef.get(e.getNome().toLowerCase().replace(" ", "_")),
+                    e.getNome(),
+                    Integer.parseInt(enchantmentValues.get("enchantmentValues[" + String.valueOf(e.getId()) + "]"))
+            ));
+        }
+        return listaSaida;
     }
 
     @GetMapping("/listaEncantamentos")
