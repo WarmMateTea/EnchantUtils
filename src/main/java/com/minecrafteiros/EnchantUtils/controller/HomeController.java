@@ -22,7 +22,15 @@ public class HomeController {
     private EncatamentoRepository repository;
 
     @GetMapping()
-    public String loadForm() {
+    public String loadform(){
+        try{
+            if(repository.findAll() == null || repository.findAll().isEmpty()){
+                fillTable();
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return "/views/home/home.html";
     }
 
