@@ -16,21 +16,13 @@ import java.util.Scanner;
 
 @RequestMapping("/home")
 @Controller
-public class HomeController {
+public class homeController {
 
     @Autowired
     private EncatamentoRepository repository;
 
     @GetMapping()
-    public String loadform(){
-        try{
-            if(repository.findAll() == null || repository.findAll().isEmpty()){
-                fillTable();
-            }
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    public String loadForm() {
         return "/views/home/home.html";
     }
 
@@ -45,49 +37,50 @@ public class HomeController {
         return "/views/encantamento/registroEncantamentos";
     }
 
-    @GetMapping("/formEncantamento")
+    @GetMapping("/formEncantamento") 
     public String editarEncantamento(Long id, Model model) {
+        Encantamento encantamento = new Encantamento();
         if (id != null) {
-            Encantamento encantamento = repository.findById(id).orElse(null);
-            model.addAttribute("encantamento", encantamento);
-            // return "/views/encantamento/formEncantamento";
+            encantamento = repository.findById(id).orElse(null);
         }
+        model.addAttribute("encantamento", encantamento);
         return "/views/encantamento/formEncantamento";
     }
 
     @PostMapping("/saveEncantamento")
     public String saveEncantamento(@ModelAttribute Encantamento encantamento) {
-        System.out.println(encantamento);
         repository.save(encantamento);
-        return "redirect:/views/encantamento/formEncantamento";
+        return "redirect:/home/listaEncantamentos";
     }
 
-    @PostMapping("/registroEncantamentos")
+    @PostMapping("/registroEncantamentos")  /* Isso aqui tá meio que inutilizado agora mas eu deixei aqui porque vai que né - ass: ezboy */
     public String registrarEncantamento(EncantamentoDataRecord data) {
         repository.save(new Encantamento(
                 data.nome(),
                 data.descricao(),
-                data.tesouro() == null ? false : true, /*
-                                                        * tá vindo como 'null' em vez de false qd a checkbox fica
-                                                        * desmarcada
-                                                        */
+                data.tesouro() == null ? false : true, /* tá vindo como 'null' em vez de false qd a checkbox fica desmarcada */
                 data.nivel_max(),
-                data.peso_encantamento()));
+                data.peso_encantamento()
+            ));
 
         return "/views/encantamento/registroEncantamentos";
     }
 
-    @RequestMapping(value = "/resetTable")
+    @GetMapping("/deleteEncantamento/{id}")
+    public String deleteEncantamento(@PathVariable Long id) {
+        repository.deleteById(id);
+        return "redirect:/home/listaEncantamentos";
+    }
+
+    @RequestMapping(value="/resetTable")
     public String resetTable() {
         repository.deleteAll();
         fillTable();
         return "redirect:/home/listaEncantamentos";
     }
 
-    public void fillTable() { /*
-                               * Preenche a tabela "encantamento" com todos os encantamentos do minecraft
-                               * (｡◕‿‿◕｡)
-                               */
+
+    public void fillTable() {   /* Preenche a tabela "encantamento" com todos os encantamentos do minecraft (｡◕‿‿◕｡) */
         try {
             File encantamentos = new File("src\\main\\resources\\static\\csv\\encantamentos.csv");
             Scanner aux = new Scanner(encantamentos);
@@ -95,12 +88,12 @@ public class HomeController {
             while (aux.hasNextLine()) {
                 data = aux.nextLine().split(";");
                 repository.save(new Encantamento(
-                        data[0], // Nome
-                        data[1], // Descrição
+                        data[0],                       // Nome
+                        data[1],                       // Descrição
                         Boolean.parseBoolean(data[4]), // Tesouro
-                        Integer.parseInt(data[2]), // Nivel Max
-                        Integer.parseInt(data[3]) // Peso
-                ));
+                        Integer.parseInt(data[2]),     // Nivel Max
+                        Integer.parseInt(data[3])      // Peso
+                    ));
             }
             aux.close();
         } catch (FileNotFoundException e) {
