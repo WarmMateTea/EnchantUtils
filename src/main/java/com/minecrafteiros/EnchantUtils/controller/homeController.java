@@ -39,22 +39,21 @@ public class homeController {
 
     @GetMapping("/formEncantamento") 
     public String editarEncantamento(Long id, Model model) {
+        Encantamento encantamento = new Encantamento();
         if (id != null) {
-            Encantamento encantamento = repository.findById(id).orElse(null);
-            model.addAttribute("encantamento", encantamento);
-            // return "/views/encantamento/formEncantamento";
+            encantamento = repository.findById(id).orElse(null);
         }
+        model.addAttribute("encantamento", encantamento);
         return "/views/encantamento/formEncantamento";
     }
 
     @PostMapping("/saveEncantamento")
     public String saveEncantamento(@ModelAttribute Encantamento encantamento) {
-        System.out.println(encantamento);
         repository.save(encantamento);
-        return "redirect:/views/encantamento/formEncantamento";
+        return "redirect:/home/listaEncantamentos";
     }
 
-    @PostMapping("/registroEncantamentos")
+    @PostMapping("/registroEncantamentos")  /* Isso aqui tá meio que inutilizado agora mas eu deixei aqui porque vai que né - ass: ezboy */
     public String registrarEncantamento(EncantamentoDataRecord data) {
         repository.save(new Encantamento(
                 data.nome(),
@@ -65,6 +64,12 @@ public class homeController {
             ));
 
         return "/views/encantamento/registroEncantamentos";
+    }
+
+    @GetMapping("/deleteEncantamento/{id}")
+    public String deleteEncantamento(@PathVariable Long id) {
+        repository.deleteById(id);
+        return "redirect:/home/listaEncantamentos";
     }
 
     @RequestMapping(value="/resetTable")

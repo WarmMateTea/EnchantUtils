@@ -6,5 +6,5 @@ buttonListarEncantamentos.addEventListener("click", () => {
 });
 
 buttonCadastrarEncantamentos.addEventListener("click", () => {
-    window.location.href = "home/registroEncantamentos";
+    window.location.href = "home/formEncantamento";
 });
