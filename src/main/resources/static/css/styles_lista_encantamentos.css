@@ -26,6 +26,105 @@ main {
     justify-content: center;
 }
 
+#confirmation-modal {
+    display: none;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(7px);
+}
+
+#confirmation-modal-background {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.562);
+    height: 100%;
+    width: 100%;
+}
+
+#modal-wrapper {
+    width: 50vw;
+    height: 50vh;
+    z-index: 1;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal-wrapper-background {
+    background-image: url("../img/dirt_texture.jpg");
+    background-size: 10vh;
+    width: 50vw;
+    height: 50vh;
+    z-index: -1;
+    filter: brightness(0.3);
+    position: absolute;
+    /* Dêem graças a Deus: https://pixelcorners.lukeb.co.uk/?radius=8&multiplier=4 */
+    clip-path: polygon(
+        0px calc(100% - 20px),
+        4px calc(100% - 20px),
+        4px calc(100% - 12px),
+        8px calc(100% - 12px),
+        8px calc(100% - 8px),
+        12px calc(100% - 8px),
+        12px calc(100% - 4px),
+        20px calc(100% - 4px),
+        20px 100%,
+        calc(100% - 20px) 100%,
+        calc(100% - 20px) calc(100% - 4px),
+        calc(100% - 12px) calc(100% - 4px),
+        calc(100% - 12px) calc(100% - 8px),
+        calc(100% - 8px) calc(100% - 8px),
+        calc(100% - 8px) calc(100% - 12px),
+        calc(100% - 4px) calc(100% - 12px),
+        calc(100% - 4px) calc(100% - 20px),
+        100% calc(100% - 20px),
+        100% 20px,
+        calc(100% - 4px) 20px,
+        calc(100% - 4px) 12px,
+        calc(100% - 8px) 12px,
+        calc(100% - 8px) 8px,
+        calc(100% - 12px) 8px,
+        calc(100% - 12px) 4px,
+        calc(100% - 20px) 4px,
+        calc(100% - 20px) 0px,
+        20px 0px,
+        20px 4px,
+        12px 4px,
+        12px 8px,
+        8px 8px,
+        8px 12px,
+        4px 12px,
+        4px 20px,
+        0px 20px
+    );
+}
+
+#modal-title {
+    color: white;
+    text-shadow: 0px 3px #444;
+    font-weight: 200;
+    font-size: 1.25vw;
+}
+
+#modal-buttons-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+}
+
+#modal-yes,
+#modal-no {
+    width: 40%;
+}
+
 header, footer {
     height: 20vh;
 }

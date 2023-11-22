@@ -14,13 +14,19 @@ body {
     width: 100%;
     height: 100vh;
     margin: 0;
+
+
+}
+
+form {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
     gap: 25px;
-
+    width: 100%;
+    height: 100%;
 }
 
 #background {
@@ -73,4 +79,3 @@ body {
 .mcButtons:hover {
     border: 3px solid white;
 }
-

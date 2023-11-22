@@ -37,15 +37,21 @@ public class homeController {
         return "/views/encantamento/registroEncantamentos";
     }
 
-    @RequestMapping(value="/formEncantamento") 
-    public String editarEncantamento(@RequestParam Long id, Model model) {
-        Encantamento encantamento = repository.findById(id).orElse(null);
-        if (encantamento != null) {
+    @GetMapping("/formEncantamento") 
+    public String editarEncantamento(Long id, Model model) {
+        if (id != null) {
+            Encantamento encantamento = repository.findById(id).orElse(null);
             model.addAttribute("encantamento", encantamento);
-            return "/views/encantamento/formEncantamento";
-        } else {
-            return "redirect:/views/encantamento/listaEncantamentos";
+            // return "/views/encantamento/formEncantamento";
         }
+        return "/views/encantamento/formEncantamento";
+    }
+
+    @PostMapping("/saveEncantamento")
+    public String saveEncantamento(@ModelAttribute Encantamento encantamento) {
+        System.out.println(encantamento);
+        repository.save(encantamento);
+        return "redirect:/views/encantamento/formEncantamento";
     }
 
     @PostMapping("/registroEncantamentos")

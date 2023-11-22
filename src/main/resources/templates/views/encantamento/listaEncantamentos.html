@@ -12,6 +12,20 @@
 </head>
 
 <body>
+
+  
+  <div id="confirmation-modal">
+    <div id="confirmation-modal-background"></div>
+    <div id="modal-wrapper">
+      <div id="modal-wrapper-background"></div>
+      <h1 id="modal-title">Titulo Genérico iupii</h1>
+      <div id="modal-buttons-wrapper">
+        <button id="modal-yes" class="mcButtons">Sim</button>
+        <button id="modal-no" class="mcButtons">Não</button>
+      </div>
+    </div>
+  </div>
+
   <header>
       <div id="lista-header-background"></div>
       <div id="header-items-wrapper">
@@ -20,7 +34,6 @@
       </div>
   </header>
   <main>
-
     <div id="lista-background"></div>
     <div id="lista-encantamentos">
       <div class="encantamentosWrapper" th:tabindex="${encantamento.id}" th:each="encantamento : ${listaEncantamentos}" th:value="${encantamento.id}" th:ondblclick="|window.location.href='formEncantamento?id=${encantamento.id}'|">
@@ -37,13 +50,13 @@
     <div id="lista-footer-background"></div>
     <div id="footer-buttons-wrapper">
       <div id="upper-buttons-wrapper">
-        <button id="create-new-enchantment"class="upperButtons mcButtons" th:onclick="|window.location.href='formEncantamento'">Criar Encantamento Customizado</button>
+        <button id="create"class="upperButtons mcButtons">Criar Encantamento Customizado</button>
         <button id="see-enchantment-details" class="upperButtons mcButtons">Visualizar Encantamento Selecionado</button>
       </div>
       <div id="lower-buttons-wrapper">
         <button id="edit-enchantment" class="lowerButtons mcButtons">Editar</button>
-        <button id="delete-enchantment"class="lowerButtons mcButtons">Deletar</button>
-        <button id="reset-table" class="lowerButtons mcButtons" th:onclick="|window.location.href='resetTable'|">Resetar Tabela</button>
+        <button id="delete"class="lowerButtons mcButtons">Deletar</button>
+        <button id="reset-table" class="lowerButtons mcButtons">Resetar Tabela</button>
         <button id="return"class="lowerButtons mcButtons">Voltar</button>
       </div>
     </div>
