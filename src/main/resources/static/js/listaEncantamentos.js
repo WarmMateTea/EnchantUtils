@@ -1,6 +1,6 @@
 const enchantments = document.querySelectorAll(".encantamentosWrapper");
 const returnButton = document.querySelector("#return");
-const editButton = document.querySelector("#edit-enchantment");
+const editButton = document.querySelectorAll("#edit-enchantment");
 const resetTableButton = document.querySelector("#reset-table");
 const deleteButton = document.querySelector("#delete");
 const createButton = document.querySelector("#create");
@@ -32,12 +32,15 @@ resetTableButton.addEventListener('click', () => {
     }, {once: true});
 });
 
-editButton.addEventListener("click", () => {
-    if (!selectedItemId) {
-        return;
-    }
-    window.location.href = `formEncantamento?id=${selectedItemId}`;
-})
+for (let i = 0; i < editButton.length; i++) {
+    editButton[i].addEventListener("click", () => {
+        if (!selectedItemId) {
+            return;
+        }
+        window.location.href = `formEncantamento?id=${selectedItemId}`;
+    })
+}
+
 
 returnButton.addEventListener("click", () => {
     window.location.href = "/home";
@@ -56,7 +59,7 @@ deleteButton.addEventListener("click", () => {
     let noButton = document.querySelector("#modal-no");
 
     yesButton.addEventListener('click', () => {
-        window.location.href = `deleteEncantamento?id=${selectedItemId}`;
+        window.location.href = `deleteEncantamento/${selectedItemId}`;
     }, {once: true});
 
     noButton.addEventListener('click', () => {

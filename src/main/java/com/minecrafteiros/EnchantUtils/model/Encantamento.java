@@ -22,7 +22,13 @@ public class Encantamento {
         this.peso_encantamento = peso_encantamento;
     }
 
-    public Encantamento() {}
+    public Encantamento() {
+        this.nome = "";
+        this.descricao = "";
+        this.tesouro = false;
+        this.nivel_max = 0;
+        this.peso_encantamento = 0;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
