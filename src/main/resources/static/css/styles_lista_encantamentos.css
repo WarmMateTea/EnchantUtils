@@ -1,0 +1,328 @@
+@font-face {
+    font-family: 'Minecraft';
+    src: url("../fonts/minecraft-font.ttf");
+}
+
+* {
+    font-family: 'Minecraft';
+}
+
+html {
+    top: 0;
+}
+
+body {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    /* justify-content: ; */
+    margin: 0;
+}
+
+main {
+    height: 60vh;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+#confirmation-modal {
+    display: none;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(7px);
+}
+
+#confirmation-modal-background {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.562);
+    height: 100%;
+    width: 100%;
+}
+
+#modal-wrapper {
+    width: 50vw;
+    height: 50vh;
+    z-index: 1;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal-wrapper-background {
+    background-image: url("../img/dirt_texture.jpg");
+    background-size: 10vh;
+    width: 50vw;
+    height: 50vh;
+    z-index: -1;
+    filter: brightness(0.3);
+    position: absolute;
+    /* Dêem graças a Deus: https://pixelcorners.lukeb.co.uk/?radius=8&multiplier=4 */
+    clip-path: polygon(
+        0px calc(100% - 20px),
+        4px calc(100% - 20px),
+        4px calc(100% - 12px),
+        8px calc(100% - 12px),
+        8px calc(100% - 8px),
+        12px calc(100% - 8px),
+        12px calc(100% - 4px),
+        20px calc(100% - 4px),
+        20px 100%,
+        calc(100% - 20px) 100%,
+        calc(100% - 20px) calc(100% - 4px),
+        calc(100% - 12px) calc(100% - 4px),
+        calc(100% - 12px) calc(100% - 8px),
+        calc(100% - 8px) calc(100% - 8px),
+        calc(100% - 8px) calc(100% - 12px),
+        calc(100% - 4px) calc(100% - 12px),
+        calc(100% - 4px) calc(100% - 20px),
+        100% calc(100% - 20px),
+        100% 20px,
+        calc(100% - 4px) 20px,
+        calc(100% - 4px) 12px,
+        calc(100% - 8px) 12px,
+        calc(100% - 8px) 8px,
+        calc(100% - 12px) 8px,
+        calc(100% - 12px) 4px,
+        calc(100% - 20px) 4px,
+        calc(100% - 20px) 0px,
+        20px 0px,
+        20px 4px,
+        12px 4px,
+        12px 8px,
+        8px 8px,
+        8px 12px,
+        4px 12px,
+        4px 20px,
+        0px 20px
+    );
+}
+
+#modal-title {
+    color: white;
+    text-shadow: 0px 3px #444;
+    font-weight: 200;
+    font-size: 1.25vw;
+}
+
+#modal-buttons-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+}
+
+#modal-yes,
+#modal-no {
+    width: 40%;
+}
+
+header, footer {
+    height: 20vh;
+}
+
+footer {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#lista-header-background,
+#lista-footer-background,
+#lista-background {
+    position: absolute;
+    width: 100%;
+    background-image: url("../img/dirt_texture.jpg");
+    background-size: 10vh;
+    z-index: -1;
+    
+}
+
+#header-items-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-shadow: 0px 3px #444;
+    height: 100%;
+
+}
+
+header h1 {
+    font-size: 1.25vw;
+    font-weight: 200;
+    text-align: center;
+    margin: 0;
+}
+
+#searchbar {
+    width: 30vw;
+    height: 5vh;
+    color: white;
+    background-color: black;
+    border: 3px solid #a0a0a0;
+    outline-width: 0;
+    font-size: 1vw;
+    line-height: 5vh;
+}
+
+#lista-background {
+    height: 60vh;
+    margin: 0 25vh;
+    box-shadow: 0px 15px 25px 0px rgba(0,0,0,0.95) inset, 0px -15px 25px 0px rgba(0,0,0,0.95) inset;
+    filter: brightness(0.15);
+}
+
+#lista-header-background,
+#lista-footer-background {
+    height: 20vh;
+    margin: 0;
+    filter: brightness(0.3);
+}
+
+#lista-encantamentos {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    width: 40vw;
+    overflow-y: auto;
+    gap: 10px;
+}
+
+#lista-encantamentos::-webkit-scrollbar {
+    width: 15px;
+}
+
+#lista-encantamentos::-webkit-scrollbar-track {
+    background-color: black;
+}
+
+#lista-encantamentos::-webkit-scrollbar-thumb {
+    background-color: #c0c0c0;
+    box-shadow: -3px -3px #808080 inset;
+    width: 100%;
+}
+
+.encantamentosWrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 10vh;
+    width: 90%;
+    gap: 15px;
+
+}
+
+.encantamentosWrapper:focus {
+    background-color: black;
+    border: 3px solid white;
+
+}
+
+.encantamentosWrapper:first-of-type {
+    margin-top: 15px;
+}
+
+.encantamentosWrapper:last-of-type {
+    margin-bottom: 15px;
+}
+
+/* .encantamentosNomeDescricaoWrapper {
+    margin-right: 1vw;
+} */
+
+.encantamentosImages {
+    height: 100%;
+    user-select: none;
+    margin: 0;
+}
+
+.encantamentosNomes,
+.encantamentosDescricao {
+    user-select: none;
+    cursor: default;
+}
+
+.encantamentosNomes {
+    font-size: 1.25vw;
+    font-weight: 100;
+    margin: 0;
+}
+
+.encantamentosDescricao {
+    height: 2.8vh;
+    overflow: hidden;
+    margin: 0;
+    color: #808080;
+}
+
+#footer-buttons-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#upper-buttons-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: 25px;
+    width: 100%;
+}
+
+#lower-buttons-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: 25px;
+    height: 100%;
+}
+
+.mcButtons {
+    width: 100%;
+    height: 6vh;
+    margin-bottom: 10px;
+    font-family: 'Minecraft';
+    border: 3px solid black;
+    background-color: #666;
+    background-size: 100% 400px;
+    background-position: center;
+    color: white;
+    font-size: 0.8vw;
+    text-shadow: 0px 3px #444;
+    box-shadow: inset 3px 3px 1px rgba(256,256,256,.3), inset -3px -6px 1px rgba(0,0,0,.15);
+}
+
+.mcButtons:hover {
+    border: 3px solid white;
+}
+
+.upperButtons {
+    width: 20vw;
+}
+
+.lowerButtons {
+    width: calc(10vw - 12.5px);
+}
+
+
+.truncate {
+    line-height:normal;
+}
