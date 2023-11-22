@@ -2,9 +2,7 @@ package com.minecrafteiros.EnchantUtils.controller;
 
 import com.minecrafteiros.EnchantUtils.model.Encantamento;
 import com.minecrafteiros.EnchantUtils.model.EncantamentoDataRecord;
-import com.minecrafteiros.EnchantUtils.model.EncantamentoEditRecord;
 import com.minecrafteiros.EnchantUtils.model.EncatamentoRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +14,7 @@ import java.util.Scanner;
 
 @RequestMapping("/home")
 @Controller
-public class homeController {
+public class HomeController {
 
     @Autowired
     private EncatamentoRepository repository;
