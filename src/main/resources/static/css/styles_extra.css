@@ -1,0 +1,67 @@
+@font-face {
+  font-family: "Minecraft";
+  src: url("../fonts/minecraft-font.ttf");
+}
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Pixelify+Sans&display=swap");
+
+* {
+  font-family: "Minecraft";
+}
+
+.selection-box {
+  background: #51493a;
+  box-shadow: -4px -4px 0px 0px #fff inset, 4px 4px 0px 0px #373737 inset;
+}
+
+.enchantment-btn {
+  background: #a09172;
+  box-shadow: -4px -4px 0px 0px #544c3b inset, 4px 4px 0px 0px #e0ca9f inset;
+}
+
+.enchantment-btn-selected {
+  color: #fff;
+  background: #51493a;
+  box-shadow: -4px -4px 0px 0px #544c3b inset, 4px 4px 0px 0px #e0ca9f inset;
+}
+
+.item-name-input {
+  color: #000;
+  font-family: Minecraftia;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px; /* 133.333% */
+  letter-spacing: 0.1px;
+
+  background: #a09172;
+  box-shadow: -4px -4px 0px 0px #544c3b inset, 4px 4px 0px 0px #e0ca9f inset;
+}
+
+.topic-text {
+  color: #000;
+  text-align: left;
+  font-family: Minecraftia;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px; /* 133.333% */
+  letter-spacing: 0.1px;
+}
+
+.common-btn-wrapper {
+  border: 3px solid #000;
+  background: #707070;
+  box-shadow: -4px -4px 0px 0px #575757 inset, 4px 4px 0px 0px #a9a9a9 inset;
+}
+
+.common-btn-input {
+  color: #fff;
+  text-align: left;
+  text-shadow: 2px 2px 0px #3e3e3e;
+  font-family: Minecraftia;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px; /* 133.333% */
+  letter-spacing: 0.1px;
+}
