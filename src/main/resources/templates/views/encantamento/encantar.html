@@ -5,37 +5,44 @@
     <title>Title</title>
     <link th:href="@{/css/styles.css}" rel="stylesheet" href="../../static/css/styles.css">
     <link th:href="@{/css/styles_extra.css}" rel="stylesheet" href="../../static/css/styles_extra.css">
+    <link th:href="@{/css/styles_home.css}" rel="stylesheet" href="../../static/css/styles_home.css">
     <link rel="stylesheet" href="../../static/css/styles.css">
     <link rel="stylesheet" href="../../static/css/styles_extra.css">
+
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
+
+<div hidden syles="display: hidden;">
+    <!-- Botão para buscar todos os encantamentos -->
+    <form id="formTodos" th:action="@{/home/todos}" method="get">
+        <button type="submit">Buscar Todos os Encantamentos</button>
+    </form>
+
+    <!-- Botão para buscar encantamentos tesouro -->
+    <form id="formTesouro" th:action="@{/home/tesouro}" method="get">
+        <button type="submit">Buscar Encantamentos Tesouro</button>
+    </form>
+
+    <!-- Botão para buscar encantamento por nome -->
+    <form id="formPorNome" th:action="@{/home/por-nome}" method="get">
+        <input id="campoNome" type="text" name="nome" placeholder="Nome do Encantamento">
+        <button type="submit">Buscar por Nome</button>
+    </form>
+</div>
+
+
+
 <body class="w-full min-h-full flex flex-row align-middle justify-center">
 
-<div class="flex flex-col">
-    <!-- Botão para buscar todos os encantamentos -->
-<form th:action="@{/encantamentos/todos}" method="get" class="flex min-w-full mt-4 mb-4">
-    <div class="w-1/2 pt-3 pb-1 flex flex-row justify-center common-btn-wrapper">
-    <button class="pt-2 common-btn-input" type="submit">Buscar Todos os Encantamentos</button></div>
-</form>
+<div class="min-w-full column align-middle justify-center">
 
-<!-- Botão para buscar encantamentos tesouro -->
-<form th:action="@{/encantamentos/tesouro}" method="get" class="flex min-w-full mt-4 mb-4">
-    <div class="w-1/2 pt-3 pb-1 flex flex-row justify-center common-btn-wrapper">
-    <button class="pt-2 common-btn-input" type="submit">Buscar Encantamentos Tesouro</button></div>
-</form>
+<div class="row">
+    <button onclick="enviarTodos()">ALL</button>
+    <button onclick="enviarTesouro()">TREASURE</button>
+    <button onclick="enviarPorNome()">NAME</button>
+</div>
 
-<!-- Botão para buscar encantamento por nome -->
-<form th:action="@{/encantamentos/por-nome}" method="get" class="flex min-w-full mt-4 mb-4">
-    <div class="w-1/2 pt-3 pb-1 flex flex-row justify-center common-btn-wrapper">
-    <input type="text" name="nome" placeholder="Nome do Encantamento"></div>
-    <button class="pt-2 common-btn-input" type="submit">Buscar por Nome</button>
-</form>
-
-<form id="encantarForm" th:action="@{/encantar}" method="post" class="mt-24 w-11/12 space-x-5 px-9 py-10 pt-5 pb-3 flex flex-row"
-style="border-radius: 6px;
-border: 4px solid #000;
-background: #C6C6C6;
-box-shadow: 8px 8px 0px 0px #FFF inset, -8px -8px 0px 0px #555 inset;">
+<form id="encantarForm" th:action="@{/encantar}" method="post" class="mt-24 w-11/12 space-x-5 px-9 py-10 pt-5 pb-3 flex flex-row" style="border-radius: 6px; border: 4px solid #000; background: #C6C6C6; box-shadow: 8px 8px 0px 0px #FFF inset, -8px -8px 0px 0px #555 inset;">
 
     <!-- coluna 1 - encantar, imagem, item -->
     <div class="flex flex-col w-1/3 space-y-5 pt-16"
@@ -77,128 +84,100 @@ align-items: center;">
 
         <!-- aqui vão os encantamentos -->
         <div  id="listaEncantamentos" class="w-300px h-80 p-1 selection-box max-h-80 overflow-y-scroll overflow-x-clip">
-            <!-- basicamente cada encantamento é um botão desses que tem que segurar o estado de checked ou não-->
-            <div th:each="encantamento : ${encantamentos}" class="enchantment-btn">
-                <button type="button" th:text="${encantamento.nome}" class="w-10/12 h-16 pl-4 text-left" th:data-encantamento="encantamento.id"    >
-                    
-                </button>
-                <input type="number" th:name="'enchantmentValues[' + ${encantamento.id} + ']'" placeholder="lv0" class="w-14 h-full overflow-hidden">
+            <div th:each="encantamento : ${encantamentos}" th:data-encantamento="${encantamento.id}" class="enchantment-btn">
+                <button type="button" th:text="${encantamento.nome}" class="w-10/12 h-16 pl-4 text-left"></button>
+                <input type="number" th:name="encantamento.id" placeholder="lv0" class="w-14 h-full overflow-hidden bg-BACKGROUND-DAY">
             </div>
         </div>
 
         <!-- guarda os encantamentos selecionados -->
-        <input type="hidden" id="encantamentosInput" name="encantamentos" th:value="${encantamentosSelecionados}">
+        <input type="hidden" id="mapaEncantamentosInput" name="mapaEncantamentos">
 
         <!-- loucura do botão de encantar -->
         <div class="flex flex-row min-w-full justify-end mt-4 mb-4">
             <!-- isso é o botão em si -->
             <div class="w-1/2 pt-3 pb-1 flex flex-row justify-center common-btn-wrapper">
-                <input type="submit" class="pt-2 common-btn-input" value="Encantar">
+                <input type="button" class="pt-2 common-btn-input" onclick="enviarDados()" value="Encantar">
             </div>
         </div>
 
     </div>
 </form> <!-- aqui é importante, o form vai enviar o item e a lista de encantamentos selecionados para o controller, que vai rodar o anvil e retornar a página de resposta (que não está feita) -->
-</div>    
+</div>
+</div>
 
-
-
-<script>
-    $(document).ready(function() {
-      var encantamentosSelecionados = [];
-  
-      $('.enchantment-btn').click(function() {
-        var enchantment = $(this).data('encantamento');
-  
-        // Toggle selecionado/não selecionado
-        if (encantamentosSelecionados.includes(enchantment)) {
-            encantamentosSelecionados = encantamentosSelecionados.filter(item => item !== enchantment);
-        } else {
-            encantamentosSelecionados.push(enchantment);
+<script th:inline="javascript">
+    function enviarTodos() {
+        document.getElementById('formTodos').submit();
+    }
+    function enviarTesouro() {
+        document.getElementById('formTesouro').submit();
+    }
+    function enviarPorNome() {
+        var nomeEncantamento = prompt("Digite o nome do encantamento:");
+        if (nomeEncantamento !== null && nomeEncantamento !== "") {
+            document.getElementById('campoNome').value = nomeEncantamento;
         }
-  
-        // Atualiza o valor do campo oculto
-        $('#encantamentosInput').val(encantamentosSelecionados.join(','));
-  
-        // Atualiza a aparência do botão
-        $(this).toggleClass('enchantment-btn-selected');
-      });
+        document.getElementById('formPorNome').submit();
+    }
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("Script is running!");
+
+        var enchantmentBtns = document.querySelectorAll('.enchantment-btn');
+        
+        enchantmentBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                this.classList.toggle('enchantment-btn-selected');
+            });
+        });
     });
-  </script>
 
-<script th:inline="javascript">
-    function carregarEncantamentosTesouro() {
-        $.get("/home/encantar-tesouro", function (data) {
-            // Limpar a lista atual de encantamentos
-            $("#listaEncantamentos").empty();
 
-            // Adicionar os novos encantamentos
-            $.each(data, function (index, encantamento) {
-                var button = $("<button>")
-                    .attr("type", "button")
-                    .addClass("w-10/12 h-16")
-                    .text(encantamento.nome)
-                    .attr("th:data-encantamento", encantamento.id);
+    function enviarDados() {
+        // Coletar as informações das divs selecionadas
+        var encantamentosSelecionados = [];
+        var encantamentoDivs = document.querySelectorAll('.enchantment-btn-selected');
 
-                var input = $("<input>")
-                    .attr("type", "number")
-                    .attr("th:name", "enchantmentValues[" + encantamento.id + "]")
-                    .attr("placeholder", "lv0")
-                    .addClass("w-14 h-full overflow-hidden");
+        encantamentoDivs.forEach(function (div) {
+            var nome = div.querySelector('button').innerText;
+            var id = div.getAttribute('data-encantamento');
+            var nivel = div.querySelector('input').value;
 
-                var div = $("<div>")
-                    .append(button)
-                    .append(input)
-                    .attr('th:each="encantamento : ${encantamentos}"')
-                    .addClass("enchantment-btn");
+            var encantamentoObj = {
+                nome: nome,
+                id: parseInt(id),
+                nivel: parseInt(nivel)
+            };
 
-                $("#listaEncantamentos").append(div);
-            });
+            encantamentosSelecionados.push(encantamentoObj);
         });
+
+        // Coletar o ID do item
+        var item = document.getElementById('item').value;
+
+        // Enviar dados para o servidor
+        var dados = {
+            dadosBotoesSelecionados: encantamentosSelecionados,
+            item: item
+        };
+
+        // Enviar dados para o servidor usando uma requisição AJAX ou outra abordagem
+        // Exemplo com Fetch API:
+        fetch('/home/encantar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dados)
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Erro:', error));
     }
 </script>
 
-<script th:inline="javascript">
-    function carregarTodosEncantamentos() {
-        $.get("/home/encantar-todos", function (data) {
-            atualizarListaEncantamentos(data);
-        });
-    }
 
-    function buscarEncantamentoPorNome() {
-        var nome = prompt("Digite o nome do encantamento:");
-        if (nome !== null && nome !== "") {
-            $.get("/home/encantar-por-nome?nome=" + nome, function (data) {
-                atualizarListaEncantamentos(data);
-            });
-        }
-    }
-
-    function atualizarListaEncantamentos(encantamentos) {
-        $("#listaEncantamentos").empty();
-
-        $.each(encantamentos, function (index, encantamento) {
-                var button = $("<button>")
-                    .attr("type", "button")
-                    .addClass("w-10/12 h-16")
-                    .text(encantamento.nome)
-                    .attr("th:data-encantamento", encantamento.id);
-
-                var input = $("<input>")
-                    .attr("type", "number")
-                    .attr("th:name", "enchantmentValues[" + encantamento.id + "]")
-                    .attr("placeholder", "lv0")
-                    .addClass("w-14 h-full overflow-hidden");
-
-                var div = $("<div>")
-                    .append(button)
-                    .append(input)
-                    .attr('th:each="encantamento : ${encantamentos}"')
-                    .addClass("enchantment-btn");
-
-                $("#listaEncantamentos").append(div);
-        });
-    }
-</script>
 </body>
 </html>

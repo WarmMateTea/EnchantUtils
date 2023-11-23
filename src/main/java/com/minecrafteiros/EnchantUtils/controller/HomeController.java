@@ -1,10 +1,9 @@
 package com.minecrafteiros.EnchantUtils.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.minecrafteiros.EnchantUtils.anvil.*;
-import com.minecrafteiros.EnchantUtils.model.Encantamento;
-import com.minecrafteiros.EnchantUtils.model.EncantamentoDataRecord;
-import com.minecrafteiros.EnchantUtils.model.EncantamentoEditRecord;
-import com.minecrafteiros.EnchantUtils.model.EncatamentoRepository;
+import com.minecrafteiros.EnchantUtils.model.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +21,7 @@ import java.util.Scanner;
 @RequestMapping("/home")
 @Controller
 public class HomeController {
+    Long idGlobal = Long.valueOf(0);
 
     @Autowired
     private EncatamentoRepository repository;
@@ -40,47 +40,55 @@ public class HomeController {
 
     @PostMapping("/encantar")
     public String encantarItens(
+            @ModelAttribute List<EncantamentoDTO> ledto,
             @RequestParam("item") String item,
-            @RequestParam("encantamentos") List<Long> encantamentosSelecionados,
-            @RequestParam Map<String,String> enchantmentValues,
             Model model) {
-        List<Encantamento> listaEncantamentosSelecionados = repository.findAllById(encantamentosSelecionados);
+
+//        List<EncantamentoDTO> ledto = new ArrayList<>();
+//        for (Map<String, Object> encantamento : dadosBotoesSelecionados) {
+//            String nome = (String) encantamento.get("nome");
+//            Long id = (Long) encantamento.get("id");
+//            Integer nivel = (Integer) encantamento.get("nivel");
+//            ledto.add(new EncantamentoDTO(nome, id, nivel));
+//        }
 
         Item i = new Item(item, item.toUpperCase());    //incrementar depois
         Anvil a = new Anvil();
-        AnvilResponse ar = a.Request(i, convertEncantamentoToEnchantment(listaEncantamentosSelecionados, enchantmentValues));
-
+        AnvilResponse ar = a.Request(i, convertEncantamentoToEnchantment(ledto));
+        model.addAttribute("listaExterna",ar.getTreeLevels());
+        model.addAttribute("custo",ar.getCost());
         return "/views/encantamento/resultado";  //ainda n existe
     }
 
-    @GetMapping("/encantar-tesouro")
+    private ArrayList<Enchantment> convertEncantamentoToEnchantment(List<EncantamentoDTO> dbs) {
+        ArrayList<Enchantment> l = new ArrayList<>();
+        for (EncantamentoDTO edto : dbs) {
+            l.add(new Enchantment(EnchantmentReferences.EnchantRef.get(edto.getId()), edto.getNome().toLowerCase().replace(' ', '_'), edto.getNivel()));
+        }
+        return l;
+    }
+
+    @GetMapping("/tesouro")
     public String listarEncantamentosTesouro(Model model) {
         List<Encantamento> encantamentos = repository.findAllTesouros();
         model.addAttribute("encantamentos", encantamentos);
-        return "listaEncantamentos";
+        return "/views/encantamento/encantar";
     }
 
-    @GetMapping("/encantar-todos")
-    public List<Encantamento> getTodosEncantamentos() {
-        return repository.findAll();
+    @GetMapping("/todos")
+    public String getTodosEncantamentos(Model model) {
+        List<Encantamento> encantamentos = repository.findAll();
+        model.addAttribute("encantamentos", encantamentos);
+        return "/views/encantamento/encantar";
     }
 
-    @GetMapping("/encantar-por-nome")
-    public List<Encantamento> getEncantamentosPorNome(@RequestParam String nome) {
-        return repository.findByNome(nome);
+    @GetMapping("/por-nome")
+    public String getEncantamentosPorNome(@RequestParam String nome, Model model) {
+        List<Encantamento> encantamentos = repository.findByNome(nome);
+        model.addAttribute("encantamentos", encantamentos);
+        return "/views/encantamento/encantar";
     }
 
-    private ArrayList<Enchantment> convertEncantamentoToEnchantment(List<Encantamento> listaEntrada, Map<String,String> enchantmentValues) {
-        ArrayList<Enchantment> listaSaida = new ArrayList<Enchantment>();
-        for (Encantamento e : listaEntrada) {
-            listaSaida.add(new Enchantment(
-                    EnchantmentReferences.EnchantRef.get(e.getNome().toLowerCase().replace(" ", "_")),
-                    e.getNome(),
-                    Integer.parseInt(enchantmentValues.get("enchantmentValues[" + String.valueOf(e.getId()) + "]"))
-            ));
-        }
-        return listaSaida;
-    }
 
     @GetMapping("/listaEncantamentos")
     public String loadListaEncantamentos(Model model) {
@@ -93,21 +101,31 @@ public class HomeController {
         return "/views/encantamento/registroEncantamentos";
     }
 
+
     @GetMapping("/formEncantamento")
     public String editarEncantamento(Long id, Model model) {
+        Encantamento encantamento = new Encantamento();
         if (id != null) {
-            Encantamento encantamento = repository.findById(id).orElse(null);
-            model.addAttribute("encantamento", encantamento);
-            // return "/views/encantamento/formEncantamento";
+            encantamento = repository.findById(id).orElse(null);
+            idGlobal = id;
         }
+        model.addAttribute("encantamento", encantamento);
         return "/views/encantamento/formEncantamento";
     }
 
     @PostMapping("/saveEncantamento")
     public String saveEncantamento(@ModelAttribute Encantamento encantamento) {
-        System.out.println(encantamento);
+        if (idGlobal != 0) {
+            repository.deleteById(idGlobal);
+        }
         repository.save(encantamento);
-        return "redirect:/views/encantamento/formEncantamento";
+        return "redirect:/home/listaEncantamentos";
+    }
+
+    @GetMapping("/deleteEncantamento/{id}")
+    public String deleteEncantamento(@PathVariable Long id) {
+        repository.deleteById(id);
+        return "redirect:/home/listaEncantamentos";
     }
 
     @PostMapping("/registroEncantamentos")

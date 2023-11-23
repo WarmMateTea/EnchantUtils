@@ -1,5 +1,5 @@
 <!-- play em like atari -->
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
@@ -12,24 +12,31 @@
 </head>
 
 <body>
-    <div id="background"></div>
+<div id="background"></div>
 
-    <form th:object="${encantamento}" th:action="@{/home/saveEncantamento}" method="post">
-        <h1 class="fieldTitle">Nome</h1>    
-        <input autocomplete="off" spellcheck="false" type="text" class="textBox" id="nome" th:value="${encantamento?.nome}">
-        <h1 class="fieldTitle">Descrição</h1>
-        <input autocomplete="off" spellcheck="false" type="text" class="textBox" id="descricao" th:value="${encantamento?.descricao}">
-        <h1 class="fieldTitle">Tesouro</h1>
-        <input autocomplete="off" spellcheck="false" type="checkbox" class="textBox" id="tesouro" th:checked="${encantamento?.tesouro}">
-        <h1 class="fieldTitle">Nível Máximo</h1>
-        <input autocomplete="off" spellcheck="false" type="number" class="textBox" id="nivelmax" max="5" th:value="${encantamento?.nivel_max}">
-        <h1 class="fieldTitle">Peso do Encantamento</h1>
-        <input autocomplete="off" spellcheck="false" type="number" class="textBox" id="peso" max="10" th:value="${encantamento?.peso_encantamento}">
-        <div id="buttons-wrapper">
-            <button type="submit" class="mcButtons" >Salvar</button>
-            <button type="reset" class="mcButtons" th:onclick="|window.location.href='listaEncantamentos'|">Cancelar</button>
-        </div>
-    </form>
+<form th:object="${encantamento}" th:action="@{/home/saveEncantamento}" method="post">
+    <input type="hidden" id="id" th:value="${encantamento?.id}">
+
+    <h1 class="fieldTitle">Nome</h1>
+    <input autocomplete="off" spellcheck="false" type="text" class="textBox" id="nome" th:field="*{nome}">
+
+    <h1 class="fieldTitle">Descrição</h1>
+    <input autocomplete="off" spellcheck="false" type="text" class="textBox" id="descricao" th:field="*{descricao}">
+
+    <h1 class="fieldTitle">Tesouro</h1>
+    <input autocomplete="off" spellcheck="false" type="checkbox" class="textBox" id="tesouro" th:field="*{tesouro}">
+
+    <h1 class="fieldTitle">Nível Máximo</h1>
+    <input autocomplete="off" spellcheck="false" type="number" class="textBox" id="nivelmax" max="5" th:field="*{nivel_max}">
+
+    <h1 class="fieldTitle">Peso do Encantamento</h1>
+    <input autocomplete="off" spellcheck="false" type="number" class="textBox" id="peso" max="10" th:field="*{peso_encantamento}">
+
+    <div id="buttons-wrapper">
+        <button type="submit" class="mcButtons" >Salvar</button>
+        <button type="reset" class="mcButtons" th:onclick="|window.location.href='listaEncantamentos'|">Cancelar</button>
+    </div>
+</form>
 
 
 

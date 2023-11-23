@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet" href="../../static/css/styles.css">
+    <link th:href="@{/css/styles_extra.css}" rel="stylesheet" href="../../static/css/styles_extra.css">
+    <link rel="stylesheet" href="../../static/css/styles.css">
+    <link rel="stylesheet" href="../../static/css/styles_extra.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+<div th:each="listaInterna : ${listaExterna}">
+    <h2>Lista Interna:</h2>
+    <ul>
+        <li th:each="item : ${listaInterna}" th:text="${item.toString()}"></li>
+    </ul>
+</div>
+</body>
+</html>
