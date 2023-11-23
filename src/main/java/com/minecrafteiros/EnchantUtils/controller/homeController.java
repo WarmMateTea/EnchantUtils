@@ -17,7 +17,6 @@ import java.util.Scanner;
 @RequestMapping("/home")
 @Controller
 public class homeController {
-
     @Autowired
     private EncatamentoRepository repository;
 
@@ -28,6 +27,7 @@ public class homeController {
 
     @GetMapping("/listaEncantamentos")
     public String loadListaEncantamentos(Model model) {
+        idGlobal = Long.valueOf(0);
         model.addAttribute("listaEncantamentos", repository.findAll());
         return "/views/encantamento/listaEncantamentos";
     }
@@ -36,12 +36,15 @@ public class homeController {
     public String loadRegistrarEncantamento() {
         return "/views/encantamento/registroEncantamentos";
     }
+    Long idGlobal;
+
 
     @GetMapping("/formEncantamento") 
     public String editarEncantamento(Long id, Model model) {
         Encantamento encantamento = new Encantamento();
         if (id != null) {
             encantamento = repository.findById(id).orElse(null);
+            idGlobal = id;
         }
         model.addAttribute("encantamento", encantamento);
         return "/views/encantamento/formEncantamento";
@@ -49,6 +52,9 @@ public class homeController {
 
     @PostMapping("/saveEncantamento")
     public String saveEncantamento(@ModelAttribute Encantamento encantamento) {
+        if (idGlobal != 0) {
+            repository.deleteById(idGlobal);
+        }
         repository.save(encantamento);
         return "redirect:/home/listaEncantamentos";
     }
@@ -74,6 +80,7 @@ public class homeController {
 
     @RequestMapping(value="/resetTable")
     public String resetTable() {
+
         repository.deleteAll();
         fillTable();
         return "redirect:/home/listaEncantamentos";

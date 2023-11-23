@@ -4,6 +4,8 @@ const editButton = document.querySelectorAll("#edit-enchantment");
 const resetTableButton = document.querySelector("#reset-table");
 const deleteButton = document.querySelector("#delete");
 const createButton = document.querySelector("#create");
+const searchbar = document.querySelector("#searchbar");
+
 var selectedItemId = null;
 
 for (let i = 0; i < enchantments.length; i++) {
@@ -11,6 +13,14 @@ for (let i = 0; i < enchantments.length; i++) {
         selectedItemId = enchantments[i].getAttribute('value');
     });
 };
+
+searchbar.addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+        console.log();
+        searchbar.textContent = "Teste";
+        // window.location.href = `/home/searchbar/${searchbar.textContent}`;
+    }
+});
 
 createButton.addEventListener("click", () => {
     window.location.href = "formEncantamento";

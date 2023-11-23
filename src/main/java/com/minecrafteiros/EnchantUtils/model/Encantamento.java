@@ -1,5 +1,7 @@
 package com.minecrafteiros.EnchantUtils.model;
 
+import org.springframework.data.repository.query.Param;
+
 import jakarta.persistence.*;
 
 @Entity
